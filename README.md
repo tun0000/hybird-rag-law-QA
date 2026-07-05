@@ -1,5 +1,7 @@
 # 繁體中文 Hybrid RAG 知識問答系統
 
+[![CI](https://github.com/tun0000/hybird-rag-law-QA/actions/workflows/ci.yml/badge.svg)](https://github.com/tun0000/hybird-rag-law-QA/actions/workflows/ci.yml)
+
 以台灣 15 部勞動法規為知識庫的檢索增強生成(RAG)問答系統:BM25 + BGE-M3 向量檢索以 RRF 融合,經 bge-reranker-v2-m3 重排序後生成附條文引用的答案,回答附上「哪份法規哪一條」的引用來源,查無依據時誠實拒答而非瞎掰。全部設計決策都有 40 題評估集與 8 組消融實驗的實測數據支撐——見 [EVAL_REPORT.md](EVAL_REPORT.md)。
 
 ## 架構
@@ -74,6 +76,8 @@ docker compose up --build api ui
 ```
 
 ### 跑測試與評估
+
+83 個單元測試不依賴 GPU 或真實 LLM API(heavy model 皆延遲載入,測試只走 mock/cache 路徑),每次 push 會由 [GitHub Actions](.github/workflows/ci.yml) 自動執行。
 
 ```bash
 uv run pytest                                    # 83 個單元測試

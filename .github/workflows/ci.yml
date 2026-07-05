@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
+        with:
+          enable-cache: true
+
+      - name: Install Python
+        run: uv python install 3.11
+
+      # Full dependency set (torch, transformers, qdrant-client, jieba, LLM
+      # SDKs...) — no GPU/API keys needed: heavy models are lazy-loaded and
+      # every test either avoids touching them (mocked LLMs/rerankers) or
+      # only exercises cache/construction paths (see tests/test_embedding_cache.py).
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run tests
+        run: uv run pytest -v
