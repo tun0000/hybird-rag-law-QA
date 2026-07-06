@@ -88,7 +88,7 @@ uv run python eval/run_e2e_eval.py               # 端到端生成品質(LLM-as-
 
 ### Demo 截圖
 
-<!-- TODO: 補上 Streamlit UI 問答畫面截圖,建議放 docs/screenshot-*.png -->
+![Streamlit UI 問答示範:婚假問題,附引用來源與檢索 debug 面板](docs/screenshot-demo.png)
 
 ## 技術棧
 
