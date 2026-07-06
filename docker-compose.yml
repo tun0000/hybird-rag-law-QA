@@ -7,6 +7,20 @@
 #
 # No GPU on the host? Drop the `deploy.resources` block on `api` and set
 # DEVICE=cpu in .env — everything still works, just slower.
+#
+# First request after `api` starts takes ~45-60s (no persisted HF cache
+# volume, so BGE-M3 + reranker download fresh into the container); every
+# request after that is a few seconds. Verified end-to-end 2026-07: GPU
+# reservation, Qdrant server mode, and generation all work without extra
+# nvidia-container-toolkit setup on Docker Desktop's WSL2 backend.
+#
+# `docker compose build` / `up --build` may fail with a gRPC "bake" session
+# error on some Docker Desktop versions ("x-docker-expose-session-sharedkey
+# contains value with non-printable ASCII characters"). Workaround: build
+# manually and tag to match compose's expected image names, then start
+# without --build:
+#   docker build -t <project>-api -t <project>-ui .
+#   docker compose up -d api ui
 
 services:
   qdrant:
