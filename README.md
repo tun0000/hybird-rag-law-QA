@@ -107,10 +107,8 @@ uv run python eval/run_e2e_eval.py               # 端到端生成品質(LLM-as-
 
 ## 專案文件
 
-- [plan.md](plan.md) — 開發計畫與各階段進度
 - [DESIGN.md](DESIGN.md) — 技術選型理由與 tradeoff
 - [EVAL_REPORT.md](EVAL_REPORT.md) — 評估數據、消融實驗、失敗案例分析
-- [INTERVIEW_PREP.md](INTERVIEW_PREP.md) — 面試常見追問與回答要點
 - [eval/dataset/README.md](eval/dataset/README.md) — 評估集 schema 與出題原則
 
 ## 資料來源與授權
